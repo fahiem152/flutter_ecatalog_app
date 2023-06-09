@@ -22,7 +22,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           ),
         ),
       );
-      // TODO: implement event handler
     });
   }
 }

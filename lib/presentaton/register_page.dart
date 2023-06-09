@@ -38,6 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register Page'),
+        elevation: 5,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -124,6 +125,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 );
               },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Text.rich(
+                TextSpan(
+                  text: 'Sudah punya akun ?',
+                  children: [
+                    TextSpan(
+                      text: ' Login',
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
