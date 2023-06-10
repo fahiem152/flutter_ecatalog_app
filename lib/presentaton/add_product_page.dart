@@ -38,7 +38,7 @@ class _AddProductPageState extends State<AddProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add Product Page'),
+          title: const Text('Add Product Page'),
           elevation: 5,
         ),
         body: SingleChildScrollView(
@@ -56,7 +56,7 @@ class _AddProductPageState extends State<AddProductPage> {
                     labelText: 'Title',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 TextField(
@@ -65,7 +65,7 @@ class _AddProductPageState extends State<AddProductPage> {
                     labelText: 'Price',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 TextField(
@@ -75,14 +75,22 @@ class _AddProductPageState extends State<AddProductPage> {
                   ),
                   maxLines: 5,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 32,
                 ),
                 BlocConsumer<AddProductBloc, AddProductState>(
                   listener: (context, state) {
-                    if (state is AddProductLoaded) {
+                    if (state is AddProductError) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
+                          content: Text(state.message),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
+                    if (state is AddProductLoaded) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
                           content: Text(
                             'Add Product Success}',
                           ),
@@ -95,18 +103,10 @@ class _AddProductPageState extends State<AddProductPage> {
                       Navigator.pop(context);
                       context.read<ProductsBloc>().add(GetProductsEvent());
                     }
-                    if (state is AddProductError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
                   },
                   builder: (context, state) {
                     if (state is AddProductLoading) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -124,7 +124,7 @@ class _AddProductPageState extends State<AddProductPage> {
                                 model: addProductModel,
                               ));
                         },
-                        child: Text('Add Product'));
+                        child: const Text('Add Product'));
                   },
                 )
               ],

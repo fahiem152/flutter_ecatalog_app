@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecatalog/bloc/products/products_bloc.dart';
 import 'package:flutter_ecatalog/presentaton/add_product_page.dart';
+import 'package:flutter_ecatalog/presentaton/edit_product_page.dart';
 
 import '../data/datasources/local_datasource.dart';
 import 'login_page.dart';
@@ -73,6 +74,25 @@ class _HomePageState extends State<HomePage> {
                         ),
                         subtitle: Text(
                           state.data.reversed.toList()[index].price.toString(),
+                        ),
+                        trailing: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return EditProductPage(
+                                    product:
+                                        state.data.reversed.toList()[index],
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.edit,
+                            color: Colors.amber,
+                          ),
                         ),
                       ),
                     ),

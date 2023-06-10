@@ -46,4 +46,25 @@ class ProductDataSource {
       return const Left('Gagal Create Product');
     }
   }
+
+  Future<Either<String, ProductResponseModel>> editProduct(
+      ProductRequestModel model, final String idProduct) async {
+    final response = await http.put(
+      Uri.parse('https://api.escuelajs.co/api/v1/products/${idProduct}'),
+      body: model.toJson(),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    debugPrint(response.statusCode.toString());
+    debugPrint(response.body);
+    debugPrint(idProduct.toString());
+
+    if (response.statusCode == 200) {
+      return Right(
+        ProductResponseModel.fromJson(response.body),
+      );
+    } else {
+      return const Left('Gagal Create Product');
+    }
+  }
 }
