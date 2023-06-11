@@ -68,6 +68,7 @@ class _EditProductPageState extends State<EditProductPage> {
                 ),
                 TextField(
                   controller: priceController,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     labelText: 'Price',
                   ),
@@ -98,8 +99,9 @@ class _EditProductPageState extends State<EditProductPage> {
                     if (state is EditProductLoaded) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
+                          backgroundColor: Colors.deepPurple,
                           content: Text(
-                            'Edit Product Success}',
+                            'Edit Product Success',
                           ),
                         ),
                       );
