@@ -26,7 +26,7 @@ class _EditProductPageState extends State<EditProductPage> {
   void initState() {
     titleController = TextEditingController(text: '${widget.product.title}');
     priceController =
-        TextEditingController(text: '${widget.product.price.toString()}');
+        TextEditingController(text: widget.product.price.toString());
     descriptionController =
         TextEditingController(text: '${widget.product.description}');
     super.initState();
@@ -34,7 +34,6 @@ class _EditProductPageState extends State<EditProductPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     titleController!.dispose();
     priceController!.dispose();

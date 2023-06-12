@@ -15,16 +15,26 @@ class PaginationProductBloc
     this.dataSource,
   ) : super(PaginationProductInitial()) {
     on<GetPaginationProductEvent>((event, emit) async {
-      emit(PaginationProductLoading());
+      if (state is PaginationProductLoading) return;
+      final currentState = state;
+      List<ProductResponseModel> oldData = [];
+      if (currentState is PaginationProductLoaded) {
+        oldData = event.offset == 0 ? [] : currentState.data;
+      }
+      emit(PaginationProductLoading(data: oldData));
+
       final result =
           await dataSource.getProudctPagination(event.offset, event.limit);
+      List<ProductResponseModel> newData = [];
+      newData = oldData;
       result.fold(
         (l) => emit(PaginationProductError(message: l)),
-        (r) => emit(
-          PaginationProductLoaded(
-            data: r,
+        (r) => {
+          newData.addAll(
+            r,
           ),
-        ),
+          emit(PaginationProductLoaded(data: newData)),
+        },
       );
     });
   }

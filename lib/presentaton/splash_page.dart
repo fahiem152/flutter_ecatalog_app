@@ -14,7 +14,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   void checkAuth() async {
     final auth = await LocalDatasource().getToken();
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 1000));
     if (auth.isNotEmpty) {
       Navigator.push(
         context,
@@ -44,7 +44,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.deepPurple,
       body: Center(
         child: Text(

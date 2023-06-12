@@ -6,7 +6,12 @@ abstract class PaginationProductState {}
 
 class PaginationProductInitial extends PaginationProductState {}
 
-class PaginationProductLoading extends PaginationProductState {}
+class PaginationProductLoading extends PaginationProductState {
+  final List<ProductResponseModel> data;
+  PaginationProductLoading({
+    required this.data,
+  });
+}
 
 class PaginationProductLoaded extends PaginationProductState {
   final List<ProductResponseModel> data;
