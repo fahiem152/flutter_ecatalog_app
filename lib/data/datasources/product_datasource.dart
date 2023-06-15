@@ -31,11 +31,11 @@ class ProductDataSource {
   }
 
   Future<Either<String, List<ProductResponseModel>>> getProudctPagination(
-      int offset, int limit) async {
+      {required int offset, required int limit}) async {
     final response = await http.get(
       Uri.parse(
-          'https://api.escuelajs.co/api/v1/products/?offset=${offset}&limit=${limit}'),
-      headers: {'Content-Type': 'application/json'},
+          'https://api.escuelajs.co/api/v1/products/?offset=$offset&limit=$limit'),
+      // headers: {'Content-Type': 'application/json'},
     );
     debugPrint(response.body);
 

@@ -2,23 +2,49 @@
 part of 'pagination_product_bloc.dart';
 
 @immutable
-abstract class PaginationProductState {}
+abstract class PaginationProductState extends Equatable {}
 
-class PaginationProductInitial extends PaginationProductState {}
+class PaginationProductInitial extends PaginationProductState {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
 
 class PaginationProductLoading extends PaginationProductState {
-  final List<ProductResponseModel> data;
-  PaginationProductLoading({
-    required this.data,
-  });
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
 
 class PaginationProductLoaded extends PaginationProductState {
   final List<ProductResponseModel> data;
-
+  final int offset;
+  final int limit;
+  final bool isNext;
   PaginationProductLoaded({
     required this.data,
+    this.offset = 0,
+    this.limit = 20,
+    this.isNext = false,
   });
+
+  PaginationProductLoaded copyWith({
+    List<ProductResponseModel>? data,
+    int? offset,
+    int? limit,
+    bool? isNext,
+  }) {
+    return PaginationProductLoaded(
+      data: data ?? this.data,
+      offset: offset ?? this.offset,
+      limit: limit ?? this.limit,
+      isNext: isNext ?? this.isNext,
+    );
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [offset, limit, isNext];
 }
 
 class PaginationProductError extends PaginationProductState {
@@ -26,4 +52,8 @@ class PaginationProductError extends PaginationProductState {
   PaginationProductError({
     required this.message,
   });
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
 }
