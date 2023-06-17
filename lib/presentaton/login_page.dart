@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecatalog/bloc/login_cubit/login_cubit.dart';
 import 'package:flutter_ecatalog/data/datasources/local_datasource.dart';
 import 'package:flutter_ecatalog/presentaton/home_page.dart';
 import 'package:flutter_ecatalog/presentaton/register_page.dart';
 
-import '../bloc/login/login_bloc.dart';
 import '../data/models/requests/login_request_model.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,14 +26,14 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
-  void checkAuth() async {
-    final auth = await LocalDatasource().getToken();
-    if (auth.isNotEmpty) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const HomePage();
-      }));
-    }
-  }
+  // void checkAuth() async {
+  //   final auth = await LocalDatasource().getToken();
+  //   if (auth.isNotEmpty) {
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //       return const HomePage();
+  //     }));
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -78,57 +78,152 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 16,
             ),
-            BlocConsumer<LoginBloc, LoginState>(
+            BlocConsumer<LoginCubit, LoginCubitState>(
               listener: (context, state) {
-                if (state is LoginError) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(state.message),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
+                state.maybeWhen(
+                  orElse: () {},
+                  error: (message) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(message),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  },
+                  loaded: (model) {
+                    LocalDatasource().saveToken(model.accessToken);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Login Success'),
+                        backgroundColor: Colors.blue,
+                      ),
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
+                  },
+                );
+                // if (state is LoginError) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     SnackBar(
+                //       content: Text(state.message),
+                //       backgroundColor: Colors.red,
+                //     ),
+                //   );
+                // }
 
-                if (state is LoginLoaded) {
-                  LocalDatasource().saveToken(state.model.accessToken);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Login Success'),
-                      backgroundColor: Colors.blue,
-                    ),
-                  );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
-                }
+                // if (state is LoginLoaded) {
+                //   LocalDatasource().saveToken(state.model.accessToken);
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     const SnackBar(
+                //       content: Text('Login Success'),
+                //       backgroundColor: Colors.blue,
+                //     ),
+                //   );
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const HomePage(),
+                //     ),
+                //   );
+                // }
               },
               builder: (context, state) {
-                if (state is LoginLoading) {
+                return state.maybeWhen(loading: () {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }
-                return ElevatedButton(
-                  onPressed: () {
-                    final requestModel = LoginRequestModel(
-                        email: emailController!.text,
-                        password: passwordController!.text);
+                }, orElse: () {
+                  return ElevatedButton(
+                    onPressed: () {
+                      final requestModel = LoginRequestModel(
+                          email: emailController!.text,
+                          password: passwordController!.text);
 
-                    context.read<LoginBloc>().add(
-                          DoLoginEvent(
-                            model: requestModel,
-                          ),
-                        );
-                  },
-                  child: const Text(
-                    'Login',
-                  ),
-                );
+                      context.read<LoginCubit>().loginCubit(requestModel);
+                    },
+                    child: const Text(
+                      'Login',
+                    ),
+                  );
+                });
+                // if (state is LoginLoading) {
+                //   return const Center(
+                //     child: CircularProgressIndicator(),
+                //   );
+                // }
+                // return ElevatedButton(
+                //   onPressed: () {
+                //     final requestModel = LoginRequestModel(
+                //         email: emailController!.text,
+                //         password: passwordController!.text);
+
+                //     context.read<LoginBloc>().add(
+                //           DoLoginEvent(
+                //             model: requestModel,
+                //           ),
+                //         );
+                //   },
+                //   child: const Text(
+                //     'Login',
+                //   ),
+                // );
               },
             ),
+            // BlocConsumer<LoginBloc, LoginState>(
+            //   listener: (context, state) {
+            //     if (state is LoginError) {
+            //       ScaffoldMessenger.of(context).showSnackBar(
+            //         SnackBar(
+            //           content: Text(state.message),
+            //           backgroundColor: Colors.red,
+            //         ),
+            //       );
+            //     }
+
+            //     if (state is LoginLoaded) {
+            //       LocalDatasource().saveToken(state.model.accessToken);
+            //       ScaffoldMessenger.of(context).showSnackBar(
+            //         const SnackBar(
+            //           content: Text('Login Success'),
+            //           backgroundColor: Colors.blue,
+            //         ),
+            //       );
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => const HomePage(),
+            //         ),
+            //       );
+            //     }
+            //   },
+            //   builder: (context, state) {
+            //     if (state is LoginLoading) {
+            //       return const Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     }
+            //     return ElevatedButton(
+            //       onPressed: () {
+            //         final requestModel = LoginRequestModel(
+            //             email: emailController!.text,
+            //             password: passwordController!.text);
+
+            //         context.read<LoginBloc>().add(
+            //               DoLoginEvent(
+            //                 model: requestModel,
+            //               ),
+            //             );
+            //       },
+            //       child: const Text(
+            //         'Login',
+            //       ),
+            //     );
+            //   },
+            // ),
             const SizedBox(
               height: 16,
             ),

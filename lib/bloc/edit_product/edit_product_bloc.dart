@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecatalog/data/datasources/product_datasource.dart';
 import 'package:flutter_ecatalog/data/models/requests/product_request_model.dart';
 import 'package:flutter_ecatalog/data/models/responses/product_response_model.dart';

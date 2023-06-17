@@ -1,18 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'pagination_product_bloc.dart';
 
-@immutable
 abstract class PaginationProductState extends Equatable {}
 
 class PaginationProductInitial extends PaginationProductState {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
 class PaginationProductLoading extends PaginationProductState {
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
@@ -43,7 +40,6 @@ class PaginationProductLoaded extends PaginationProductState {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [offset, limit, isNext];
 }
 
@@ -54,6 +50,5 @@ class PaginationProductError extends PaginationProductState {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }

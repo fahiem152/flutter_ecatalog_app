@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecatalog/bloc/pagination_product/pagination_product_bloc.dart';
+import 'package:flutter_ecatalog/bloc/products_cubit/productsc_cubit.dart';
 import 'package:flutter_ecatalog/presentaton/add_product_page.dart';
 import 'package:flutter_ecatalog/presentaton/edit_product_page.dart';
 
@@ -20,13 +20,20 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    context.read<PaginationProductBloc>().add(GetPaginationProductEvent());
+    context.read<ProductscCubit>().getProducts();
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        context.read<PaginationProductBloc>().add(NextPaginationProductEvent());
+        context.read<ProductscCubit>().nextGetProducts();
       }
     });
+    // context.read<PaginationProductBloc>().add(GetPaginationProductEvent());
+    // scrollController.addListener(() {
+    //   if (scrollController.position.maxScrollExtent ==
+    //       scrollController.offset) {
+    //     context.read<PaginationProductBloc>().add(NextPaginationProductEvent());
+    //   }
+    // });
   }
 
   @override
@@ -65,17 +72,20 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: BlocBuilder<PaginationProductBloc, PaginationProductState>(
+      body: BlocBuilder<ProductscCubit, ProductscState>(
         builder: (context, state) {
-          if (state is PaginationProductLoaded) {
-            debugPrint('totaldata : ${state.data.length}');
+          return state.maybeWhen(loaded: (data, offset, limit, isNext) {
+            debugPrint('totaldata : ${data.length}');
+            debugPrint('Offset : $offset');
+            debugPrint('Limit : $limit');
+            debugPrint('isnext : $isNext');
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ListView.builder(
                 controller: scrollController,
                 // reverse: true,
                 itemBuilder: (context, index) {
-                  if (state.isNext && index == state.data.length) {
+                  if (isNext && index == data.length) {
                     return const Column(
                       children: [
                         SizedBox(
@@ -101,9 +111,9 @@ class _HomePageState extends State<HomePage> {
                       leading: Text(
                         (index + 1).toString(),
                       ),
-                      title: Text(
-                          state.data.reversed.toList()[index].title ?? '-'),
-                      subtitle: Text('${state.data[index].price}\$'),
+                      title: Text(data.reversed.toList()[index].title ?? '-'),
+                      subtitle:
+                          Text('${data.reversed.toList()[index].price}\$'),
                       trailing: InkWell(
                           onTap: () {
                             Navigator.push(
@@ -111,8 +121,7 @@ class _HomePageState extends State<HomePage> {
                               MaterialPageRoute(
                                 builder: (context) {
                                   return EditProductPage(
-                                    product:
-                                        state.data.reversed.toList()[index],
+                                    product: data.reversed.toList()[index],
                                   );
                                 },
                               ),
@@ -125,16 +134,152 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                 },
-                itemCount:
-                    state.isNext ? state.data.length + 1 : state.data.length,
+                itemCount: isNext ? data.length + 1 : data.length,
               ),
             );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          }, orElse: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          });
+          // if (state is PaginationProductLoaded) {
+          //   debugPrint('totaldata : ${state.data.length}');
+          //   return Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //     child: ListView.builder(
+          //       controller: scrollController,
+          //       // reverse: true,
+          //       itemBuilder: (context, index) {
+          //         if (state.isNext && index == state.data.length) {
+          //           return const Column(
+          //             children: [
+          //               SizedBox(
+          //                 height: 12,
+          //               ),
+          //               Center(
+          //                 child: CircularProgressIndicator(),
+          //               ),
+          //               SizedBox(
+          //                 height: 4,
+          //               ),
+          //               Center(
+          //                 child: Text('Load More'),
+          //               ),
+          //               SizedBox(
+          //                 height: 12,
+          //               ),
+          //             ],
+          //           );
+          //         }
+          //         return Card(
+          //           child: ListTile(
+          //             leading: Text(
+          //               (index + 1).toString(),
+          //             ),
+          //             title: Text(
+          //                 state.data.reversed.toList()[index].title ?? '-'),
+          //             subtitle: Text('${state.data[index].price}\$'),
+          //             trailing: InkWell(
+          //                 onTap: () {
+          //                   Navigator.push(
+          //                     context,
+          //                     MaterialPageRoute(
+          //                       builder: (context) {
+          //                         return EditProductPage(
+          //                           product:
+          //                               state.data.reversed.toList()[index],
+          //                         );
+          //                       },
+          //                     ),
+          //                   );
+          //                 },
+          //                 child: const Icon(
+          //                   Icons.edit,
+          //                   color: Colors.amber,
+          //                 )),
+          //           ),
+          //         );
+          //       },
+          //       itemCount:
+          //           state.isNext ? state.data.length + 1 : state.data.length,
+          //     ),
+          //   );
+          // }
+          // return const Center(
+          //   child: CircularProgressIndicator(),
+          // );
         },
       ),
+      // BlocBuilder<PaginationProductBloc, PaginationProductState>(
+      //   builder: (context, state) {
+      //     if (state is PaginationProductLoaded) {
+      //       debugPrint('totaldata : ${state.data.length}');
+      //       return Padding(
+      //         padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      //         child: ListView.builder(
+      //           controller: scrollController,
+      //           // reverse: true,
+      //           itemBuilder: (context, index) {
+      //             if (state.isNext && index == state.data.length) {
+      //               return const Column(
+      //                 children: [
+      //                   SizedBox(
+      //                     height: 12,
+      //                   ),
+      //                   Center(
+      //                     child: CircularProgressIndicator(),
+      //                   ),
+      //                   SizedBox(
+      //                     height: 4,
+      //                   ),
+      //                   Center(
+      //                     child: Text('Load More'),
+      //                   ),
+      //                   SizedBox(
+      //                     height: 12,
+      //                   ),
+      //                 ],
+      //               );
+      //             }
+      //             return Card(
+      //               child: ListTile(
+      //                 leading: Text(
+      //                   (index + 1).toString(),
+      //                 ),
+      //                 title: Text(
+      //                     state.data.reversed.toList()[index].title ?? '-'),
+      //                 subtitle: Text('${state.data[index].price}\$'),
+      //                 trailing: InkWell(
+      //                     onTap: () {
+      //                       Navigator.push(
+      //                         context,
+      //                         MaterialPageRoute(
+      //                           builder: (context) {
+      //                             return EditProductPage(
+      //                               product:
+      //                                   state.data.reversed.toList()[index],
+      //                             );
+      //                           },
+      //                         ),
+      //                       );
+      //                     },
+      //                     child: const Icon(
+      //                       Icons.edit,
+      //                       color: Colors.amber,
+      //                     )),
+      //               ),
+      //             );
+      //           },
+      //           itemCount:
+      //               state.isNext ? state.data.length + 1 : state.data.length,
+      //         ),
+      //       );
+      //     }
+      //     return const Center(
+      //       child: CircularProgressIndicator(),
+      //     );
+      //   },
+      // ),
     );
   }
 }

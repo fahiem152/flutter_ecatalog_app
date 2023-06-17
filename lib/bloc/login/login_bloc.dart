@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecatalog/data/models/requests/login_request_model.dart';
 import 'package:flutter_ecatalog/data/models/responses/login_response_model.dart';
-import 'package:meta/meta.dart';
 
 import '../../data/datasources/auth_datasource.dart';
 

@@ -1,9 +1,6 @@
 part of 'products_bloc.dart';
 
-@immutable
-abstract class ProductsState {
-  get data => null;
-}
+abstract class ProductsState {}
 
 class ProductsInitial extends ProductsState {}
 

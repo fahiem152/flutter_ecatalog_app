@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_ecatalog/bloc/add_product/add_product_bloc.dart';
+import 'package:flutter_ecatalog/bloc/add_product_cubit/add_productc_cubit.dart';
 import 'package:flutter_ecatalog/bloc/edit_product/edit_product_bloc.dart';
+import 'package:flutter_ecatalog/bloc/edit_product_cubit/edit_productc_cubit.dart';
+import 'package:flutter_ecatalog/bloc/login_cubit/login_cubit.dart';
 import 'package:flutter_ecatalog/bloc/pagination_product/pagination_product_bloc.dart';
 import 'package:flutter_ecatalog/bloc/products/products_bloc.dart';
+import 'package:flutter_ecatalog/bloc/products_cubit/productsc_cubit.dart';
 import 'package:flutter_ecatalog/bloc/register/register_bloc.dart';
+import 'package:flutter_ecatalog/bloc/register_cubit/register_cubit_cubit.dart';
 import 'package:flutter_ecatalog/data/datasources/auth_datasource.dart';
 import 'package:flutter_ecatalog/presentaton/splash_page.dart';
 
@@ -40,6 +45,21 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => PaginationProductBloc(ProductDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => RegisterCubitCubit(AuthDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => LoginCubit(AuthDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => ProductscCubit(ProductDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => AddProductcCubit(ProductDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => EditProductcCubit(ProductDataSource()),
         ),
       ],
       child: MaterialApp(

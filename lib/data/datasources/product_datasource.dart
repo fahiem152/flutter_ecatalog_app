@@ -74,7 +74,7 @@ class ProductDataSource {
   Future<Either<String, ProductResponseModel>> editProduct(
       ProductRequestModel model, final String idProduct) async {
     final response = await http.put(
-      Uri.parse('https://api.escuelajs.co/api/v1/products/${idProduct}'),
+      Uri.parse('https://api.escuelajs.co/api/v1/products/$idProduct'),
       body: model.toJson(),
       headers: {'Content-Type': 'application/json'},
     );

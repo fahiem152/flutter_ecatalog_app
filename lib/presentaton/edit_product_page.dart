@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecatalog/bloc/edit_product/edit_product_bloc.dart';
 
-import '../bloc/products/products_bloc.dart';
+import 'package:flutter_ecatalog/bloc/edit_product_cubit/edit_productc_cubit.dart';
+import 'package:flutter_ecatalog/bloc/products_cubit/productsc_cubit.dart';
+
 import '../data/models/requests/product_request_model.dart';
 import '../data/models/responses/product_response_model.dart';
 
@@ -85,55 +86,108 @@ class _EditProductPageState extends State<EditProductPage> {
                 const SizedBox(
                   height: 32,
                 ),
-                BlocConsumer<EditProductBloc, EditProductState>(
+                BlocConsumer<EditProductcCubit, EditProductcState>(
                   listener: (context, state) {
-                    if (state is EditProductError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                    if (state is EditProductLoaded) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          backgroundColor: Colors.deepPurple,
-                          content: Text(
-                            'Edit Product Success',
-                          ),
-                        ),
-                      );
+                    state.maybeWhen(
+                        orElse: () {},
+                        error: (message) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(message),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        },
+                        loaded: (model) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.deepPurple,
+                              content: Text(
+                                'Edit Product Success',
+                              ),
+                            ),
+                          );
 
-                      titleController!.clear();
-                      priceController!.clear();
-                      descriptionController!.clear();
-                      Navigator.pop(context);
-                      context.read<ProductsBloc>().add(GetProductsEvent());
-                    }
+                          titleController!.clear();
+                          priceController!.clear();
+                          descriptionController!.clear();
+                          Navigator.pop(context);
+                          context.read<ProductscCubit>().getProducts();
+                        });
                   },
                   builder: (context, state) {
-                    if (state is EditProductLoading) {
+                    return state.maybeWhen(loading: () {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
-                    }
-                    return ElevatedButton(
-                        onPressed: () {
-                          final editProductModel = ProductRequestModel(
-                            title: titleController!.text,
-                            price: int.parse(
-                              priceController!.text,
-                            ),
-                            description: descriptionController!.text,
-                          );
+                    }, orElse: () {
+                      return ElevatedButton(
+                          onPressed: () {
+                            final editProductModel = ProductRequestModel(
+                              title: titleController!.text,
+                              price: int.parse(
+                                priceController!.text,
+                              ),
+                              description: descriptionController!.text,
+                            );
 
-                          context.read<EditProductBloc>().add(
-                              DoEditProductEvent(
-                                  model: editProductModel,
-                                  idProduct: widget.product.id.toString()));
-                        },
-                        child: const Text('Edit Product'));
+                            context.read<EditProductcCubit>().editProduct(
+                                  editProductModel,
+                                  widget.product.id.toString(),
+                                );
+                          },
+                          child: const Text('Edit Product'));
+                    });
+
+                    // BlocConsumer<EditProductBloc, EditProductState>(
+                    //   listener: (context, state) {
+                    //     if (state is EditProductError) {
+                    //       ScaffoldMessenger.of(context).showSnackBar(
+                    //         SnackBar(
+                    //           content: Text(state.message),
+                    //           backgroundColor: Colors.red,
+                    //         ),
+                    //       );
+                    //     }
+                    //     if (state is EditProductLoaded) {
+                    //       ScaffoldMessenger.of(context).showSnackBar(
+                    //         const SnackBar(
+                    //           backgroundColor: Colors.deepPurple,
+                    //           content: Text(
+                    //             'Edit Product Success',
+                    //           ),
+                    //         ),
+                    //       );
+
+                    //       titleController!.clear();
+                    //       priceController!.clear();
+                    //       descriptionController!.clear();
+                    //       Navigator.pop(context);
+                    //       context.read<ProductsBloc>().add(GetProductsEvent());
+                    //     }
+                    //   },
+                    //   builder: (context, state) {
+                    //     if (state is EditProductLoading) {
+                    //       return const Center(
+                    //         child: CircularProgressIndicator(),
+                    //       );
+                    //     }
+                    //     return ElevatedButton(
+                    //         onPressed: () {
+                    //           final editProductModel = ProductRequestModel(
+                    //             title: titleController!.text,
+                    //             price: int.parse(
+                    //               priceController!.text,
+                    //             ),
+                    //             description: descriptionController!.text,
+                    //           );
+
+                    //           context.read<EditProductBloc>().add(
+                    //               DoEditProductEvent(
+                    //                   model: editProductModel,
+                    //                   idProduct: widget.product.id.toString()));
+                    //         },
+                    //         child: const Text('Edit Product'));
                   },
                 )
                 // BlocConsumer<EditProductBloc, EditProductState>(

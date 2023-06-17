@@ -1,10 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_ecatalog/data/models/requests/product_request_model.dart';
+import 'dart:io';
 
-import '../bloc/add_product/add_product_bloc.dart';
-import '../bloc/products/products_bloc.dart';
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecatalog/bloc/add_product_cubit/add_productc_cubit.dart';
+import 'package:flutter_ecatalog/bloc/products_cubit/productsc_cubit.dart';
+import 'package:flutter_ecatalog/data/models/requests/product_request_model.dart';
+import 'package:flutter_ecatalog/presentaton/camera_page.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddProductPage extends StatefulWidget {
   const AddProductPage({super.key});
@@ -17,6 +21,20 @@ class _AddProductPageState extends State<AddProductPage> {
   TextEditingController? titleController;
   TextEditingController? priceController;
   TextEditingController? descriptionController;
+  XFile? picture;
+
+  List<XFile>? multiplePicture;
+
+  void takePicture(XFile file) {
+    picture = file;
+    setState(() {});
+  }
+
+  void takeMultiplePicture(List<XFile> files) {
+    multiplePicture = files;
+    setState(() {});
+  }
+
   @override
   void initState() {
     titleController = TextEditingController();
@@ -27,11 +45,31 @@ class _AddProductPageState extends State<AddProductPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     titleController!.dispose();
     priceController!.dispose();
     descriptionController!.dispose();
+  }
+
+  Future<void> getImage(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await picker.pickImage(
+      source: source,
+      imageQuality: 50,
+    );
+    if (photo != null) {
+      setState(() {
+        picture = photo;
+      });
+    }
+  }
+
+  Future<void> getMultipleImage() async {
+    final ImagePicker picker = ImagePicker();
+    final List<XFile> photo = await picker.pickMultiImage();
+
+    multiplePicture = photo;
+    setState(() {});
   }
 
   @override
@@ -50,6 +88,79 @@ class _AddProductPageState extends State<AddProductPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                picture != null
+                    ? SizedBox(
+                        height: 200,
+                        width: 200,
+                        child: Image.file(
+                          File(
+                            picture!.path,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 200,
+                        width: 200,
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                        ),
+                      ),
+                // multiplePicture != null
+                //     ? Wrap(
+                //         children: [
+                //           ...multiplePicture!
+                //               .map((e) => SizedBox(
+                //                   height: 120,
+                //                   width: 120,
+                //                   child: Padding(
+                //                     padding: const EdgeInsets.symmetric(
+                //                         horizontal: 8),
+                //                     child: Image.file(File(e.path)),
+                //                   )))
+                //               .toList()
+                //         ],
+                //       )
+                //     : const SizedBox(),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () async {
+                        await availableCameras().then(
+                          (value) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) {
+                                return CameraPage(
+                                  takePicture: takePicture,
+                                  cameras: value,
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Camera',
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // getImage(ImageSource.gallery);
+                        getMultipleImage();
+                      },
+                      child: const Text(
+                        'Galery',
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
                 TextField(
                   controller: titleController,
                   decoration: const InputDecoration(
@@ -78,55 +189,151 @@ class _AddProductPageState extends State<AddProductPage> {
                 const SizedBox(
                   height: 32,
                 ),
-                BlocConsumer<AddProductBloc, AddProductState>(
+                BlocConsumer<AddProductcCubit, AddProductcState>(
                   listener: (context, state) {
-                    if (state is AddProductError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                    if (state is AddProductLoaded) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Add Product Success}',
+                    state.maybeWhen(
+                      orElse: () {},
+                      error: (message) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(message),
+                            backgroundColor: Colors.red,
                           ),
-                        ),
-                      );
+                        );
+                      },
+                      loaded: (model) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Add Product Success',
+                            ),
+                          ),
+                        );
 
-                      titleController!.clear();
-                      priceController!.clear();
-                      descriptionController!.clear();
-                      Navigator.pop(context);
-                      context.read<ProductsBloc>().add(GetProductsEvent());
-                    }
+                        titleController!.clear();
+                        priceController!.clear();
+                        descriptionController!.clear();
+                        Navigator.pop(context);
+                        context.read<ProductscCubit>().getProducts();
+                      },
+                    );
+                    // if (state is AddProductError) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     SnackBar(
+                    //       content: Text(state.message),
+                    //       backgroundColor: Colors.red,
+                    //     ),
+                    //   );
+                    // }
+                    // if (state is AddProductLoaded) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //       content: Text(
+                    //         'Add Product Success}',
+                    //       ),
+                    //     ),
+                    //   );
+
+                    //   titleController!.clear();
+                    //   priceController!.clear();
+                    //   descriptionController!.clear();
+                    //   Navigator.pop(context);
+                    //   context.read<ProductsBloc>().add(GetProductsEvent());
+                    // }
                   },
                   builder: (context, state) {
-                    if (state is AddProductLoading) {
+                    return state.maybeWhen(loading: () {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
-                    }
-                    return ElevatedButton(
-                        onPressed: () {
-                          final addProductModel = ProductRequestModel(
-                            title: titleController!.text,
-                            price: int.parse(
-                              priceController!.text,
-                            ),
-                            description: descriptionController!.text,
-                          );
+                    }, orElse: () {
+                      return ElevatedButton(
+                          onPressed: () {
+                            final addProductModel = ProductRequestModel(
+                              title: titleController!.text,
+                              price: int.parse(
+                                priceController!.text,
+                              ),
+                              description: descriptionController!.text,
+                            );
 
-                          context.read<AddProductBloc>().add(DoAddProductEvent(
-                                model: addProductModel,
-                              ));
-                        },
-                        child: const Text('Add Product'));
+                            context
+                                .read<AddProductcCubit>()
+                                .addProduct(addProductModel);
+                          },
+                          child: const Text('Add Product'));
+                    });
+                    // if (state is AddProductLoading) {
+                    //   return const Center(
+                    //     child: CircularProgressIndicator(),
+                    //   );
+                    // }
+                    // return ElevatedButton(
+                    //     onPressed: () {
+                    //       final addProductModel = ProductRequestModel(
+                    //         title: titleController!.text,
+                    //         price: int.parse(
+                    //           priceController!.text,
+                    //         ),
+                    //         description: descriptionController!.text,
+                    //       );
+
+                    //       context.read<AddProductBloc>().add(DoAddProductEvent(
+                    //             model: addProductModel,
+                    //           ));
+                    //     },
+                    //     child: const Text('Add Product'));
                   },
                 )
+                // BlocConsumer<AddProductBloc, AddProductState>(
+                //   listener: (context, state) {
+                //     if (state is AddProductError) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         SnackBar(
+                //           content: Text(state.message),
+                //           backgroundColor: Colors.red,
+                //         ),
+                //       );
+                //     }
+                //     if (state is AddProductLoaded) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         const SnackBar(
+                //           content: Text(
+                //             'Add Product Success}',
+                //           ),
+                //         ),
+                //       );
+
+                //       titleController!.clear();
+                //       priceController!.clear();
+                //       descriptionController!.clear();
+                //       Navigator.pop(context);
+                //       context.read<ProductsBloc>().add(GetProductsEvent());
+                //     }
+                //   },
+                //   builder: (context, state) {
+                //     if (state is AddProductLoading) {
+                //       return const Center(
+                //         child: CircularProgressIndicator(),
+                //       );
+                //     }
+                //     return ElevatedButton(
+                //         onPressed: () {
+                //           final addProductModel = ProductRequestModel(
+                //             title: titleController!.text,
+                //             price: int.parse(
+                //               priceController!.text,
+                //             ),
+                //             description: descriptionController!.text,
+                //           );
+
+                //           context.read<AddProductBloc>().add(DoAddProductEvent(
+                //                 model: addProductModel,
+                //               ));
+                //         },
+                //         child: const Text('Add Product'));
+                //   },
+                // )
               ],
             ),
           ),
