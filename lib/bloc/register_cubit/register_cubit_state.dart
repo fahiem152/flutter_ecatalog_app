@@ -4,7 +4,9 @@ part of 'register_cubit_cubit.dart';
 class RegisterCubitState with _$RegisterCubitState {
   const factory RegisterCubitState.initial() = _Initial;
   const factory RegisterCubitState.loading() = _Loading;
-  const factory RegisterCubitState.loaded(RegisterResponseModel model) =
+  const factory RegisterCubitState.loaded(RegisterFreezedResponseModel model) =
       _Loaded;
+  // const factory RegisterCubitState.loaded(RegisterResponseModel model) =
+  //     _Loaded;
   const factory RegisterCubitState.error(String message) = _Error;
 }

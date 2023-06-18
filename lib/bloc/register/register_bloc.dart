@@ -11,17 +11,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthDatasource datasource;
 
   RegisterBloc(this.datasource) : super(RegisterInitial()) {
-    on<DoRegisterEvent>((event, emit) async {
-      emit(RegisterLoading());
-      final result = await datasource.register(event.model);
-      result.fold(
-        (l) => emit(RegisterError(message: l)),
-        (r) => emit(
-          RegisterLoaded(
-            model: r,
-          ),
-        ),
-      );
-    });
+    // on<DoRegisterEvent>((event, emit) async {
+    //   emit(RegisterLoading());
+    //   final result = await datasource.register(event.model);
+    //   result.fold(
+    //     (l) => emit(RegisterError(message: l)),
+    //     (r) => emit(
+    //       RegisterLoaded(
+    //         model: r,
+    //       ),
+    //     ),
+    //   );
+    // });
   }
 }

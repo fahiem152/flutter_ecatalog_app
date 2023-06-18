@@ -20,7 +20,7 @@ mixin _$RegisterCubitState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel model) loaded,
+    required TResult Function(RegisterFreezedResponseModel model) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$RegisterCubitState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel model)? loaded,
+    TResult? Function(RegisterFreezedResponseModel model)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$RegisterCubitState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel model)? loaded,
+    TResult Function(RegisterFreezedResponseModel model)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -125,7 +125,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel model) loaded,
+    required TResult Function(RegisterFreezedResponseModel model) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -136,7 +136,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel model)? loaded,
+    TResult? Function(RegisterFreezedResponseModel model)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -147,7 +147,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel model)? loaded,
+    TResult Function(RegisterFreezedResponseModel model)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -238,7 +238,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel model) loaded,
+    required TResult Function(RegisterFreezedResponseModel model) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -249,7 +249,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel model)? loaded,
+    TResult? Function(RegisterFreezedResponseModel model)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -260,7 +260,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel model)? loaded,
+    TResult Function(RegisterFreezedResponseModel model)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -317,7 +317,9 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({RegisterResponseModel model});
+  $Res call({RegisterFreezedResponseModel model});
+
+  $RegisterFreezedResponseModelCopyWith<$Res> get model;
 }
 
 /// @nodoc
@@ -336,8 +338,16 @@ class __$$_LoadedCopyWithImpl<$Res>
       null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
-              as RegisterResponseModel,
+              as RegisterFreezedResponseModel,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $RegisterFreezedResponseModelCopyWith<$Res> get model {
+    return $RegisterFreezedResponseModelCopyWith<$Res>(_value.model, (value) {
+      return _then(_value.copyWith(model: value));
+    });
   }
 }
 
@@ -347,7 +357,7 @@ class _$_Loaded implements _Loaded {
   const _$_Loaded(this.model);
 
   @override
-  final RegisterResponseModel model;
+  final RegisterFreezedResponseModel model;
 
   @override
   String toString() {
@@ -376,7 +386,7 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel model) loaded,
+    required TResult Function(RegisterFreezedResponseModel model) loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(model);
@@ -387,7 +397,7 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel model)? loaded,
+    TResult? Function(RegisterFreezedResponseModel model)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(model);
@@ -398,7 +408,7 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel model)? loaded,
+    TResult Function(RegisterFreezedResponseModel model)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -447,9 +457,9 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements RegisterCubitState {
-  const factory _Loaded(final RegisterResponseModel model) = _$_Loaded;
+  const factory _Loaded(final RegisterFreezedResponseModel model) = _$_Loaded;
 
-  RegisterResponseModel get model;
+  RegisterFreezedResponseModel get model;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -519,7 +529,7 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(RegisterResponseModel model) loaded,
+    required TResult Function(RegisterFreezedResponseModel model) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -530,7 +540,7 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(RegisterResponseModel model)? loaded,
+    TResult? Function(RegisterFreezedResponseModel model)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -541,7 +551,7 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(RegisterResponseModel model)? loaded,
+    TResult Function(RegisterFreezedResponseModel model)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

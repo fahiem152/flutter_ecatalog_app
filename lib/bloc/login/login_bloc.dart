@@ -10,13 +10,13 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthDatasource datasource;
   LoginBloc(this.datasource) : super(LoginInitial()) {
-    on<DoLoginEvent>(
-      (event, emit) async {
-        emit(LoginLoading());
-        final result = await datasource.login(event.model);
-        result.fold((l) => emit(LoginError(message: l)),
-            (r) => emit(LoginLoaded(model: r)));
-      },
-    );
+    // on<DoLoginEvent>(
+    //   (event, emit) async {
+    //     emit(LoginLoading());
+    //     final result = await datasource.login(event.model);
+    //     result.fold((l) => emit(LoginError(message: l)),
+    //         (r) => emit(LoginLoaded(model: r)));
+    //   },
+    // );
   }
 }

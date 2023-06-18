@@ -149,8 +149,8 @@ class _AddProductPageState extends State<AddProductPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // getImage(ImageSource.gallery);
-                        getMultipleImage();
+                        getImage(ImageSource.gallery);
+                        // getMultipleImage();
                       },
                       child: const Text(
                         'Galery',
@@ -217,29 +217,6 @@ class _AddProductPageState extends State<AddProductPage> {
                         context.read<ProductscCubit>().getProducts();
                       },
                     );
-                    // if (state is AddProductError) {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     SnackBar(
-                    //       content: Text(state.message),
-                    //       backgroundColor: Colors.red,
-                    //     ),
-                    //   );
-                    // }
-                    // if (state is AddProductLoaded) {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     const SnackBar(
-                    //       content: Text(
-                    //         'Add Product Success}',
-                    //       ),
-                    //     ),
-                    //   );
-
-                    //   titleController!.clear();
-                    //   priceController!.clear();
-                    //   descriptionController!.clear();
-                    //   Navigator.pop(context);
-                    //   context.read<ProductsBloc>().add(GetProductsEvent());
-                    // }
                   },
                   builder: (context, state) {
                     return state.maybeWhen(loading: () {
@@ -255,34 +232,16 @@ class _AddProductPageState extends State<AddProductPage> {
                                 priceController!.text,
                               ),
                               description: descriptionController!.text,
+                              // images: picture!,
                             );
 
-                            context
-                                .read<AddProductcCubit>()
-                                .addProduct(addProductModel);
+                            context.read<AddProductcCubit>().addProduct(
+                                  addProductModel,
+                                  picture!,
+                                );
                           },
                           child: const Text('Add Product'));
                     });
-                    // if (state is AddProductLoading) {
-                    //   return const Center(
-                    //     child: CircularProgressIndicator(),
-                    //   );
-                    // }
-                    // return ElevatedButton(
-                    //     onPressed: () {
-                    //       final addProductModel = ProductRequestModel(
-                    //         title: titleController!.text,
-                    //         price: int.parse(
-                    //           priceController!.text,
-                    //         ),
-                    //         description: descriptionController!.text,
-                    //       );
-
-                    //       context.read<AddProductBloc>().add(DoAddProductEvent(
-                    //             model: addProductModel,
-                    //           ));
-                    //     },
-                    //     child: const Text('Add Product'));
                   },
                 )
                 // BlocConsumer<AddProductBloc, AddProductState>(

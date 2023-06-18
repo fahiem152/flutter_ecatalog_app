@@ -6,10 +6,11 @@ import 'package:flutter_ecatalog/bloc/edit_product_cubit/edit_productc_cubit.dar
 import 'package:flutter_ecatalog/bloc/products_cubit/productsc_cubit.dart';
 
 import '../data/models/requests/product_request_model.dart';
-import '../data/models/responses/product_response_model.dart';
+import '../data/models/responses/product_freezed_response/product_freezed_response_model.dart';
 
 class EditProductPage extends StatefulWidget {
-  final ProductResponseModel product;
+  final ProductFreezedResponseModel product;
+  // final ProductResponseModel product;
   const EditProductPage({
     Key? key,
     required this.product,

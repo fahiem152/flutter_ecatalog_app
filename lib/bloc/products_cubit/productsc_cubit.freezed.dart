@@ -20,8 +20,8 @@ mixin _$ProductscState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ProductResponseModel> data, int offset, int limit, bool isNext)
+    required TResult Function(List<ProductFreezedResponseModel> data,
+            int offset, int limit, bool isNext)
         loaded,
     required TResult Function(String message) error,
   }) =>
@@ -30,8 +30,8 @@ mixin _$ProductscState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult? Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult? Function(String message)? error,
   }) =>
@@ -40,8 +40,8 @@ mixin _$ProductscState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -131,8 +131,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ProductResponseModel> data, int offset, int limit, bool isNext)
+    required TResult Function(List<ProductFreezedResponseModel> data,
+            int offset, int limit, bool isNext)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -144,8 +144,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult? Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -157,8 +157,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -250,8 +250,8 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ProductResponseModel> data, int offset, int limit, bool isNext)
+    required TResult Function(List<ProductFreezedResponseModel> data,
+            int offset, int limit, bool isNext)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -263,8 +263,8 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult? Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -276,8 +276,8 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -336,7 +336,10 @@ abstract class _$$_LoadedCopyWith<$Res> {
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<ProductResponseModel> data, int offset, int limit, bool isNext});
+      {List<ProductFreezedResponseModel> data,
+      int offset,
+      int limit,
+      bool isNext});
 }
 
 /// @nodoc
@@ -358,7 +361,7 @@ class __$$_LoadedCopyWithImpl<$Res>
       null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<ProductResponseModel>,
+              as List<ProductFreezedResponseModel>,
       null == offset
           ? _value.offset
           : offset // ignore: cast_nullable_to_non_nullable
@@ -378,13 +381,13 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(final List<ProductResponseModel> data, this.offset,
+  const _$_Loaded(final List<ProductFreezedResponseModel> data, this.offset,
       this.limit, this.isNext)
       : _data = data;
 
-  final List<ProductResponseModel> _data;
+  final List<ProductFreezedResponseModel> _data;
   @override
-  List<ProductResponseModel> get data {
+  List<ProductFreezedResponseModel> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -428,8 +431,8 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ProductResponseModel> data, int offset, int limit, bool isNext)
+    required TResult Function(List<ProductFreezedResponseModel> data,
+            int offset, int limit, bool isNext)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -441,8 +444,8 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult? Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -454,8 +457,8 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -505,10 +508,10 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements ProductscState {
-  const factory _Loaded(final List<ProductResponseModel> data, final int offset,
-      final int limit, final bool isNext) = _$_Loaded;
+  const factory _Loaded(final List<ProductFreezedResponseModel> data,
+      final int offset, final int limit, final bool isNext) = _$_Loaded;
 
-  List<ProductResponseModel> get data;
+  List<ProductFreezedResponseModel> get data;
   int get offset;
   int get limit;
   bool get isNext;
@@ -581,8 +584,8 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<ProductResponseModel> data, int offset, int limit, bool isNext)
+    required TResult Function(List<ProductFreezedResponseModel> data,
+            int offset, int limit, bool isNext)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -594,8 +597,8 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult? Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -607,8 +610,8 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<ProductResponseModel> data, int offset, int limit,
-            bool isNext)?
+    TResult Function(List<ProductFreezedResponseModel> data, int offset,
+            int limit, bool isNext)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),

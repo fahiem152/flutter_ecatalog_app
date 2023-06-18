@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:flutter_ecatalog/data/datasources/auth_datasource.dart';
 
-import '../../data/models/responses/login_response_model.dart';
+import '../../data/models/responses/login_freezed_response/login_freezed_response_model.dart';
 
 part 'login_cubit.freezed.dart';
 part 'login_state.dart';
