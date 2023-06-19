@@ -108,10 +108,12 @@ class _HomePageState extends State<HomePage> {
                   }
                   return Card(
                     child: ListTile(
-                      leading: Text(
-                        (index + 1).toString(),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: Image.network(data[index].images[0],
+                            width: 100, height: 100, fit: BoxFit.cover),
                       ),
-                      title: Text(data.reversed.toList()[index].title ?? '-'),
+                      title: Text(data.reversed.toList()[index].title),
                       subtitle:
                           Text('${data.reversed.toList()[index].price}\$'),
                       trailing: InkWell(

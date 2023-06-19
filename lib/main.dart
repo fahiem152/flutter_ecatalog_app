@@ -13,6 +13,7 @@ import 'package:flutter_ecatalog/bloc/register/register_bloc.dart';
 import 'package:flutter_ecatalog/bloc/register_cubit/register_cubit_cubit.dart';
 import 'package:flutter_ecatalog/data/datasources/auth_datasource.dart';
 import 'package:flutter_ecatalog/presentaton/splash_page.dart';
+import 'package:flutter_ecatalog/themes/app_theme.dart';
 
 import 'bloc/login/login_bloc.dart';
 import 'data/datasources/product_datasource.dart';
@@ -64,11 +65,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.dark,
         home: const SplashPage(),
       ),
     );

@@ -7,7 +7,7 @@ import 'package:flutter_ecatalog/data/models/responses/register_response_model.d
 import 'package:http/http.dart' as http;
 
 import '../models/responses/login_freezed_response/login_freezed_response_model.dart';
-import '../models/responses/login_response_model.dart';
+
 import '../models/responses/register_frezeed_response/register_freezed_response_model.dart';
 
 class AuthDatasource {
