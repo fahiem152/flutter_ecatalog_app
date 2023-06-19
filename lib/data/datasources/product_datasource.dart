@@ -79,6 +79,22 @@ class ProductDataSource {
   //   }
   // }
 
+  Future<Either<String, ProductResponseModel>> getDetailProduct(
+      final String idProduct) async {
+    final response = await http.get(
+      Uri.parse('https://api.escuelajs.co/api/v1/products/$idProduct'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return Right(
+        ProductResponseModel.fromJson(response.body),
+      );
+    } else {
+      return const Left('get Product error');
+    }
+  }
+
   Future<Either<String, ProductResponseModel>> createProduct(
       ProductRequestModel model) async {
     final response = await http.post(

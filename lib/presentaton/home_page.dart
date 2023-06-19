@@ -5,6 +5,7 @@ import 'package:flutter_ecatalog/presentaton/add_product_page.dart';
 import 'package:flutter_ecatalog/presentaton/edit_product_page.dart';
 
 import '../data/datasources/local_datasource.dart';
+import 'detail_product_page.dart';
 import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -107,32 +108,45 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                   return Card(
-                    child: ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: Image.network(data[index].images[0],
-                            width: 100, height: 100, fit: BoxFit.cover),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return DetailProductPage(
+                            product: data.reversed.toList()[index],
+                          );
+                        }));
+                      },
+                      child: ListTile(
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Image.network(
+                              data.reversed.toList()[index].images[0],
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover),
+                        ),
+                        title: Text(data.reversed.toList()[index].title),
+                        subtitle:
+                            Text('${data.reversed.toList()[index].price}\$'),
+                        trailing: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return EditProductPage(
+                                      product: data.reversed.toList()[index],
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                            child: const Icon(
+                              Icons.edit,
+                              color: Colors.amber,
+                            )),
                       ),
-                      title: Text(data.reversed.toList()[index].title),
-                      subtitle:
-                          Text('${data.reversed.toList()[index].price}\$'),
-                      trailing: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return EditProductPage(
-                                    product: data.reversed.toList()[index],
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                          child: const Icon(
-                            Icons.edit,
-                            color: Colors.amber,
-                          )),
                     ),
                   );
                 },
