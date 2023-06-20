@@ -21,8 +21,8 @@ LoginFreezedResponseModel _$LoginFreezedResponseModelFromJson(
 
 /// @nodoc
 mixin _$LoginFreezedResponseModel {
-  String get accessToken => throw _privateConstructorUsedError;
-  String get refreshToken => throw _privateConstructorUsedError;
+  String get access_token => throw _privateConstructorUsedError;
+  String get refresh_token => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $LoginFreezedResponseModelCopyWith<$Res> {
           $Res Function(LoginFreezedResponseModel) then) =
       _$LoginFreezedResponseModelCopyWithImpl<$Res, LoginFreezedResponseModel>;
   @useResult
-  $Res call({String accessToken, String refreshToken});
+  $Res call({String access_token, String refresh_token});
 }
 
 /// @nodoc
@@ -53,17 +53,17 @@ class _$LoginFreezedResponseModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accessToken = null,
-    Object? refreshToken = null,
+    Object? access_token = null,
+    Object? refresh_token = null,
   }) {
     return _then(_value.copyWith(
-      accessToken: null == accessToken
-          ? _value.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
+      access_token: null == access_token
+          ? _value.access_token
+          : access_token // ignore: cast_nullable_to_non_nullable
               as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _value.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -78,7 +78,7 @@ abstract class _$$_LoginFreezedResponseModelCopyWith<$Res>
       __$$_LoginFreezedResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accessToken, String refreshToken});
+  $Res call({String access_token, String refresh_token});
 }
 
 /// @nodoc
@@ -94,17 +94,17 @@ class __$$_LoginFreezedResponseModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accessToken = null,
-    Object? refreshToken = null,
+    Object? access_token = null,
+    Object? refresh_token = null,
   }) {
     return _then(_$_LoginFreezedResponseModel(
-      accessToken: null == accessToken
-          ? _value.accessToken
-          : accessToken // ignore: cast_nullable_to_non_nullable
+      access_token: null == access_token
+          ? _value.access_token
+          : access_token // ignore: cast_nullable_to_non_nullable
               as String,
-      refreshToken: null == refreshToken
-          ? _value.refreshToken
-          : refreshToken // ignore: cast_nullable_to_non_nullable
+      refresh_token: null == refresh_token
+          ? _value.refresh_token
+          : refresh_token // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -114,19 +114,19 @@ class __$$_LoginFreezedResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_LoginFreezedResponseModel implements _LoginFreezedResponseModel {
   const _$_LoginFreezedResponseModel(
-      {required this.accessToken, required this.refreshToken});
+      {required this.access_token, required this.refresh_token});
 
   factory _$_LoginFreezedResponseModel.fromJson(Map<String, dynamic> json) =>
       _$$_LoginFreezedResponseModelFromJson(json);
 
   @override
-  final String accessToken;
+  final String access_token;
   @override
-  final String refreshToken;
+  final String refresh_token;
 
   @override
   String toString() {
-    return 'LoginFreezedResponseModel(accessToken: $accessToken, refreshToken: $refreshToken)';
+    return 'LoginFreezedResponseModel(access_token: $access_token, refresh_token: $refresh_token)';
   }
 
   @override
@@ -134,15 +134,15 @@ class _$_LoginFreezedResponseModel implements _LoginFreezedResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LoginFreezedResponseModel &&
-            (identical(other.accessToken, accessToken) ||
-                other.accessToken == accessToken) &&
-            (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken));
+            (identical(other.access_token, access_token) ||
+                other.access_token == access_token) &&
+            (identical(other.refresh_token, refresh_token) ||
+                other.refresh_token == refresh_token));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken);
+  int get hashCode => Object.hash(runtimeType, access_token, refresh_token);
 
   @JsonKey(ignore: true)
   @override
@@ -161,16 +161,16 @@ class _$_LoginFreezedResponseModel implements _LoginFreezedResponseModel {
 
 abstract class _LoginFreezedResponseModel implements LoginFreezedResponseModel {
   const factory _LoginFreezedResponseModel(
-      {required final String accessToken,
-      required final String refreshToken}) = _$_LoginFreezedResponseModel;
+      {required final String access_token,
+      required final String refresh_token}) = _$_LoginFreezedResponseModel;
 
   factory _LoginFreezedResponseModel.fromJson(Map<String, dynamic> json) =
       _$_LoginFreezedResponseModel.fromJson;
 
   @override
-  String get accessToken;
+  String get access_token;
   @override
-  String get refreshToken;
+  String get refresh_token;
   @override
   @JsonKey(ignore: true)
   _$$_LoginFreezedResponseModelCopyWith<_$_LoginFreezedResponseModel>

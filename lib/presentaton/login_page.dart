@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecatalog/bloc/login_cubit/login_cubit.dart';
 import 'package:flutter_ecatalog/data/datasources/local_datasource.dart';
 import 'package:flutter_ecatalog/presentaton/home_page.dart';
+import 'package:flutter_ecatalog/presentaton/main_page.dart';
 import 'package:flutter_ecatalog/presentaton/register_page.dart';
 
 import '../data/models/requests/login_request_model.dart';
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     );
                   },
                   loaded: (model) {
-                    LocalDatasource().saveToken(model.accessToken);
+                    LocalDatasource().saveToken(model.access_token);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Login Success'),
@@ -101,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomePage(),
+                        builder: (context) => const MainPage(),
                       ),
                     );
                   },

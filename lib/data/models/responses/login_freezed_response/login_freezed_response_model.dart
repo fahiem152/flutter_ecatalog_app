@@ -10,8 +10,8 @@ part 'login_freezed_response_model.g.dart';
 @freezed
 class LoginFreezedResponseModel with _$LoginFreezedResponseModel {
   const factory LoginFreezedResponseModel({
-    required String accessToken,
-    required String refreshToken,
+    required String access_token,
+    required String refresh_token,
   }) = _LoginFreezedResponseModel;
 
   factory LoginFreezedResponseModel.fromJson(Map<String, dynamic> json) =>

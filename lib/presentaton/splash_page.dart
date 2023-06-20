@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecatalog/presentaton/home_page.dart';
 import 'package:flutter_ecatalog/presentaton/login_page.dart';
+import 'package:flutter_ecatalog/presentaton/main_page.dart';
 
 import '../data/datasources/local_datasource.dart';
 
@@ -20,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return const HomePage();
+            return const MainPage();
           },
         ),
       );
