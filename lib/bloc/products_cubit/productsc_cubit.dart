@@ -6,7 +6,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_ecatalog/data/datasources/product_datasource.dart';
 
 import '../../data/models/responses/product_freezed_response/product_freezed_response_model.dart';
-import '../../data/models/responses/product_response_model.dart';
 
 part 'productsc_cubit.freezed.dart';
 part 'productsc_state.dart';

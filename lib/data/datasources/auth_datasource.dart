@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_ecatalog/data/models/requests/login_request_model.dart';
 import 'package:flutter_ecatalog/data/models/requests/regieter_request_model.dart';
-import 'package:flutter_ecatalog/data/models/responses/register_response_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/responses/login_freezed_response/login_freezed_response_model.dart';

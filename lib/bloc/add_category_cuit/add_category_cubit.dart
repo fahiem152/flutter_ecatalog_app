@@ -16,7 +16,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
   final CategoryDataSource dataSource;
   AddCategoryCubit(
     this.dataSource,
-  ) : super(AddCategoryState.initial());
+  ) : super(const AddCategoryState.initial());
 
   void addCategory(CategoryFreezedRequestModel model, XFile image) async {
     emit(const _Loading());

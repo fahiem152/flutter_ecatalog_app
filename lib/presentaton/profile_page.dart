@@ -74,19 +74,19 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              DataTable(columns: [
-                const DataColumn(
+              DataTable(columns: const [
+                DataColumn(
                   label: Text(
                     'Email',
                   ),
                 ),
-                const DataColumn(
+                DataColumn(
                   label: Text(
                     'adma@gmailc.com',
                   ),
                 ),
-              ], rows: [
-                const DataRow(
+              ], rows: const [
+                DataRow(
                   cells: [
                     DataCell(
                       Text('Password'),
@@ -140,12 +140,12 @@ class ProfilePage extends StatelessWidget {
               horizontal: 16,
               vertical: 20,
             ),
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.error,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Center(child: Text('Logout')),
+            child: const Center(child: Text('Logout')),
           ),
         ),
       ],

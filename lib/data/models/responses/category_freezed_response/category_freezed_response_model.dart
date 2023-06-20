@@ -1,10 +1,4 @@
-// To parse this JSON data, do
-//
-//     final categoryFreezedResponseModel = categoryFreezedResponseModelFromMap(jsonString);
-
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 part 'category_freezed_response_model.freezed.dart';
 part 'category_freezed_response_model.g.dart';

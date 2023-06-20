@@ -13,7 +13,7 @@ class DetailProductcCubit extends Cubit<DetailProductcState> {
   final ProductDataSource dataSource;
   DetailProductcCubit(
     this.dataSource,
-  ) : super(DetailProductcState.initial());
+  ) : super(const DetailProductcState.initial());
 
   void getDetailProduct(String id) async {
     emit(const DetailProductcState.loading());

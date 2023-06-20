@@ -16,7 +16,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<NavigationCubit>().currentIndex(0);
   }
@@ -32,14 +31,14 @@ class _MainPageState extends State<MainPage> {
             },
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 label: state.maybeMap(
                   navigationIndex: (value) => value.index == 0 ? 'Home' : '',
                   orElse: () => '',
                 ),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.format_list_bulleted),
+                icon: const Icon(Icons.format_list_bulleted),
                 label: state.maybeMap(
                   navigationIndex: (value) =>
                       value.index == 1 ? 'Category' : '',
@@ -47,7 +46,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: const Icon(Icons.person),
                 label: state.maybeMap(
                   navigationIndex: (value) => value.index == 2 ? 'Profile' : '',
                   orElse: () => '',
@@ -72,7 +71,7 @@ class _MainPageState extends State<MainPage> {
               navigationIndex: (value) => value.index,
               orElse: () => 0,
             ),
-            children: [
+            children: const [
               HomePage(),
               CategoryPage(),
               ProfilePage(),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecatalog/bloc/login_cubit/login_cubit.dart';
 import 'package:flutter_ecatalog/data/datasources/local_datasource.dart';
-import 'package:flutter_ecatalog/presentaton/home_page.dart';
+
 import 'package:flutter_ecatalog/presentaton/main_page.dart';
 import 'package:flutter_ecatalog/presentaton/register_page.dart';
 

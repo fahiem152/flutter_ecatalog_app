@@ -6,7 +6,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_ecatalog/data/datasources/auth_datasource.dart';
 
 import '../../data/models/responses/register_frezeed_response/register_freezed_response_model.dart';
-import '../../data/models/responses/register_response_model.dart';
 
 part 'register_cubit_cubit.freezed.dart';
 part 'register_cubit_state.dart';

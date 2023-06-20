@@ -26,11 +26,11 @@ class _EditProductPageState extends State<EditProductPage> {
   TextEditingController? descriptionController;
   @override
   void initState() {
-    titleController = TextEditingController(text: '${widget.product.title}');
+    titleController = TextEditingController(text: widget.product.title);
     priceController =
         TextEditingController(text: widget.product.price.toString());
     descriptionController =
-        TextEditingController(text: '${widget.product.description}');
+        TextEditingController(text: widget.product.description);
     super.initState();
   }
 

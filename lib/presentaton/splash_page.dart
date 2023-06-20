@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecatalog/presentaton/home_page.dart';
+
 import 'package:flutter_ecatalog/presentaton/login_page.dart';
 import 'package:flutter_ecatalog/presentaton/main_page.dart';
 
@@ -45,14 +45,15 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.deepPurple,
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: Text(
-          'FIC Batch 5 E-Catalog',
+          'E-Catalog App',
           style: TextStyle(
             fontSize: 32,
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.onPrimary,
+            letterSpacing: 1,
           ),
         ),
       ),

@@ -6,7 +6,7 @@ part 'navigation_state.dart';
 part 'navigation_cubit.freezed.dart';
 
 class NavigationCubit extends Cubit<NavigationState> {
-  NavigationCubit() : super(NavigationState.initial());
+  NavigationCubit() : super(const NavigationState.initial());
 
   void currentIndex(int index) {
     emit(

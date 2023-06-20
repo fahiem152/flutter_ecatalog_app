@@ -13,7 +13,6 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State<CategoryPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<CategoryCubit>().getAllCategory();
   }

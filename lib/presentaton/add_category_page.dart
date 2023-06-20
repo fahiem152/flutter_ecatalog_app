@@ -102,7 +102,7 @@ class _AddCategoryPageState extends State<AddCategoryPage> {
                     'Camera',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 8,
                 ),
                 ElevatedButton(

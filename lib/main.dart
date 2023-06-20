@@ -16,7 +16,7 @@ import 'package:flutter_ecatalog/bloc/register/register_bloc.dart';
 import 'package:flutter_ecatalog/bloc/register_cubit/register_cubit_cubit.dart';
 import 'package:flutter_ecatalog/data/datasources/auth_datasource.dart';
 import 'package:flutter_ecatalog/data/datasources/category_datasource.dart';
-import 'package:flutter_ecatalog/presentaton/main_page.dart';
+
 import 'package:flutter_ecatalog/presentaton/splash_page.dart';
 import 'package:flutter_ecatalog/themes/app_theme.dart';
 
