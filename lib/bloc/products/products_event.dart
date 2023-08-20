@@ -1,5 +1,5 @@
-part of 'products_bloc.dart';
+// part of 'products_bloc.dart';
 
-abstract class ProductsEvent {}
+// abstract class ProductsEvent {}
 
-class GetProductsEvent extends ProductsEvent {}
+// class GetProductsEvent extends ProductsEvent {}

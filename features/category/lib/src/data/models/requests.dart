@@ -1,0 +1,1 @@
+export 'requests/category_freezed_request/category_freezed_request_model.dart';

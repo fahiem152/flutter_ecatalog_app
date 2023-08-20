@@ -1,0 +1,1 @@
+export 'responses/category_freezed_response/category_freezed_response_model.dart';

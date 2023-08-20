@@ -1,7 +1,7 @@
-part of 'pagination_product_bloc.dart';
+// part of 'pagination_product_bloc.dart';
 
-abstract class PaginationProductEvent {}
+// abstract class PaginationProductEvent {}
 
-class GetPaginationProductEvent extends PaginationProductEvent {}
+// class GetPaginationProductEvent extends PaginationProductEvent {}
 
-class NextPaginationProductEvent extends PaginationProductEvent {}
+// class NextPaginationProductEvent extends PaginationProductEvent {}
